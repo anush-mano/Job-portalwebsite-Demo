@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:#F2C2A9;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background:#B87B72;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        button {
+            background-color:#922B21;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #76424E;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Find Your Ideal Job</h2>
+        <form id="quizForm">
+            <div class="question">
+                <p>1. Do you enjoy working with code?</p>
+                <input type="radio" name="q1" value="Web Developer"> Yes<br>
+                <input type="radio" name="q1" value="Software Engineer"> Love it!<br>
+                <input type="radio" name="q1" value="Data Analyst"> Somewhat<br>
+                <input type="radio" name="q1" value="Marketing Specialist"> Not really<br>
+            </div>
+
+            <div class="question">
+                <p>2. Are you creative and love designing?</p>
+                <input type="radio" name="q2" value="Graphic Designer"> Yes, I love designing!<br>
+                <input type="radio" name="q2" value="UX/UI Designer"> I enjoy creating user-friendly designs<br>
+                <input type="radio" name="q2" value="Product Manager"> I like both design and strategy<br>
+                <input type="radio" name="q2" value="Data Analyst"> No, I prefer numbers<br>
+            </div>
+
+            <div class="question">
+                <p>3. Do you enjoy analyzing data and finding patterns?</p>
+                <input type="radio" name="q3" value="Data Analyst"> Yes, I love data!<br>
+                <input type="radio" name="q3" value="Product Manager"> Sometimes, for decision-making<br>
+                <input type="radio" name="q3" value="Marketing Specialist"> Only for marketing strategies<br>
+                <input type="radio" name="q3" value="Graphic Designer"> Not at all<br>
+            </div>
+
+            <div class="question">
+                <p>4. Do you prefer managing projects and leading teams?</p>
+                <input type="radio" name="q4" value="Project Manager"> Yes, I love leadership<br>
+                <input type="radio" name="q4" value="Product Manager"> I like managing products<br>
+                <input type="radio" name="q4" value="Marketing Specialist"> Sometimes, for campaigns<br>
+                <input type="radio" name="q4" value="Software Engineer"> No, I prefer coding<br>
+            </div>
+
+            <div class="question">
+                <p>5. Are you interested in marketing and sales strategies?</p>
+                <input type="radio" name="q5" value="Marketing Specialist"> Yes, marketing is my thing!<br>
+                <input type="radio" name="q5" value="Product Manager"> Somewhat, in product marketing<br>
+                <input type="radio" name="q5" value="Data Analyst"> Only if it involves analytics<br>
+                <input type="radio" name="q5" value="Web Developer"> No, I prefer development<br>
+            </div>
+
+            <button type="button" onclick="calculateJob()">Find My Job</button>
+        </form>
+
+        <h3 id="result"></h3>
+    </div>
+
+    <script>
+        function calculateJob() {
+            let answers = {};
+            let elements = document.querySelectorAll("input[type='radio']:checked"); // Get all checked radio buttons
+            
+            if (elements.length < 5) { // Ensure all 5 questions are answered
+                document.getElementById("result").innerText = "Please answer all questions!";
+                return;
+            }
+
+            elements.forEach(element => {
+                let job = element.value;
+                answers[job] = (answers[job] || 0) + 1; // Count selections for each job
+            });
+
+            let bestJob = Object.keys(answers).reduce((a, b) => answers[a] > answers[b] ? a : b); // Find the most selected job
+
+            document.getElementById("result").innerText = `Your ideal job is: ${bestJob}! 🎉`;
+        }
+    </script>
+
+</body>
+</html>

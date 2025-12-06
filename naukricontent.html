@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background:#F2C2A9;
+            color: black;
+        }
+        h2 {
+            text-align: center;
+        }
+        .jobs-section {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .job-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: scale(1.05);
+        }
+
+        .job-card h3 {
+            font-size: 1.5rem;
+            color: #7209b7;
+        }
+
+        .job-card p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .job-card button {
+            background-color:#5F7F3D;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .job-card button:hover {
+            background-color:#3E5A26;
+        }
+        .job-card img {
+             width: 100%; /* Makes the image take the full width of the card */
+             max-width: 150px; /* Limits the image width */
+             height: auto; /* Maintains aspect ratio */
+             margin-bottom: 10px; /* Adds space between the image and text */
+        }
+
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1002;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 70%;
+            max-width: 700px;
+            text-align: center;
+            box-shadow:0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .modal-content h3 {
+            font-size:1.8rem;
+            color: #7209b7;
+            margin-bottom:20px;
+        }
+    #applicationForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px; /* Increased gap between form fields */
+    }
+
+    #applicationForm input {
+        width: 80%; /* Wide inputs for better usability */
+        padding: 12px;
+        font-size: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+
+    #applicationForm button {
+        background-color:#5F7F3D;
+        color: white;
+        border: none;
+        padding: 12px 30px;
+        font-size: 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    #applicationForm button:hover {
+        background-color:#3E5A26;
+        transform: scale(1.05);
+    }
+
+        .modal-content .job-list {
+            margin-top: 20px;
+        }
+
+        .modal-content .job-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        .modal-content .job-item h4 {
+            margin: 0 0 5px;
+            color: #3a0ca3;
+        }
+
+        .modal-content .job-item p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .modal-content .job-item button {
+            background-color: #5F7F3D;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-content .job-item button:hover {
+            background-color: #3E5A26;
+        }
+
+        .modal-close {
+            color: red;
+            cursor: pointer;
+            float: right;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Find Your Dream Job with Connect.in</h2>
+    <p class="gradient-text">
+         Welcome to Connect.in, your one-stop platform for finding the perfect job. 
+         Explore opportunities, connect with professionals, and grow your career.
+    </p>
+
+    <style>
+        .gradient-text {
+            font-size: 18px;
+            font-weight: bold;
+            background: linear-gradient(90deg, black, #8b0000, #ff0033,#add8e6,#00008b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: moveGradient 4s linear infinite;
+         }
+
+         @keyframes moveGradient {
+              0% { background-position: 0% 50%; }
+              50% { background-position: 100% 50%; }
+              100% { background-position: 0% 50%; }
+        }
+     </style>
+
+
+    <div class="jobs-section">
+        <!-- Job Cards -->
+        <div class="job-card" onclick="showJobDetails('Web Developer')">
+            <img src="Web-Developer.png" alt="Web Developer">
+            <h3>Web Developer</h3>
+            <p>Build dynamic websites and web applications</p>
+            <button>Apply</button>
+        </div>
+        <div class="job-card" onclick="showJobDetails('Graphic Designer')">
+            <img src="graphic-design.jpg" alt="Graphic Designer">
+            <h3>Graphic Designer</h3>
+            <p>Design visual content for marketing</p>
+            <button>Apply</button>
+        </div>
+        <div class="job-card" onclick="showJobDetails('Data Analyst')">
+            <img src="Data-Analyst.jpeg" alt="Data Analyst">
+            <h3>Data Analyst</h3>
+            <p>Analyze and interpret data to drive decisions</p>
+            <button>Apply</button>
+        </div>
+        <div class="job-card" onclick="showJobDetails('Marketing Specialist')">
+            <img src="marketing-specialist.png" alt="Marketing Specialist">
+            <h3>Marketing Specialist</h3>
+            <p>Develop marketing strategies for business growth</p>
+            <button>Apply</button>
+        </div>
+        <div class="job-card" onclick="showJobDetails('Product Manager')">
+            <img src="product-manager.png" alt="Product Manager">
+            <h3>Product Manager</h3>
+            <p>Lead product development and strategy</p>
+            <button>Apply</button>
+        </div>
+        <div class="job-card" onclick="showJobDetails('UX/UI Designer')">
+            <img src="ui-ux.png" alt="UX/UI Designer">
+            <h3>UX/UI Designer</h3>
+            <p>Create intuitive user interfaces</p>
+            <button>Apply</button>
+        </div>
+        <div class="job-card" onclick="showJobDetails('Project Manager')">
+            <img src="project-manager.webp" alt="Project Manager">
+            <h3>Project Manager</h3>
+            <p>Oversee projects and ensure timely delivery</p>
+            <button>Apply</button>
+        </div>
+        <div class="job-card" onclick="showJobDetails('Software Engineer')">
+            <img src="software-engineer.webp" alt="Software Engineer">
+            <h3>Software Engineer</h3>
+            <p>Design and develop software solutions</p>
+            <button>Apply</button>
+        </div>
+    </div>
+
+    <div class="modal" id="jobModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeJobModal()">&times;</span>
+            <h3 id="jobModalTitle"></h3>
+            <div id="jobDetailsContent" class="job-list"></div>
+        </div>
+    </div>
+    <!-- Application Modal -->
+    <div class="modal" id="applicationModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeApplicationModal()">&times;</span>
+            <h3 id="applicationModalTitle"></h3>
+           <form id="applicationForm" onsubmit="submitApplication(event)">
+              <input type="text" id="name" placeholder="Enter your full name">
+              <span id="name-error" style="color: red;"></span>
+
+              <input type="text" id="address" placeholder="Enter your address">
+              <span id="address-error" style="color: red;"></span>
+
+              <input type="email" id="email" placeholder="Enter your email">
+              <span id="email-error" style="color: red;"></span>
+
+             <input type="tel" id="phone" placeholder="Enter your phone number">
+             <span id="phone-error" style="color: red;"></span>
+
+             <input type="date" id="dob" placeholder="Enter your date of birth">
+             <span id="dob-error" style="color: red;"></span>
+
+            <input type="number" id="experience" placeholder="Years of experience">
+            <span id="experience-error" style="color: red;"></span>
+
+            <input type="text" id="expectedSalary" placeholder="Expected salary">
+            <span id="salary-error" style="color: red;"></span>
+
+           <textarea id="coverLetter" placeholder="Write a short cover letter" rows="4"></textarea>
+           <span id="why-error" style="color: red;"></span>
+ 
+           <input type="file" id="resume" accept=".pdf, .doc, .docx">
+           <span id="resume-error" style="color: red;"></span>
+
+           <button type="submit">Submit</button>
+      </form>
+        </div>
+    </div>
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeSuccessModal()">&times;</span>
+            <h3>Application Submitted!</h3>
+            <p>You have applied successfully. Further details will be emailed to you.</p>
+            <button onclick="closeSuccessModal()">Close</button>
+        </div>
+    </div>
+    <script>
+        const jobDetails = {
+            'Web Developer': [
+                { type: 'Full-time', company: 'TechCorp', description: 'Build dynamic websites and web applications.' },
+                { type: 'Part-time', company: 'WebWorks', description: 'Assist in developing front-end features.' },
+                { type: 'Internship', company: 'DevStart', description: 'Learn and assist with web development tasks.' }
+            ],
+            'Graphic Designer': [
+                { type: 'Full-time', company: 'DesignHub', description: 'Create visual content for marketing campaigns.' },
+                { type: 'Part-time', company: 'PixelWorks', description: 'Work on graphic designs for digital platforms.' },
+                { type: 'Internship', company: 'CreativeX', description: 'Gain hands-on experience in graphic design.' }
+            ],
+            'Data Analyst': [
+                   { type: 'Full-time', company: 'InsightCorp', description: 'Analyze and interpret large datasets to provide actionable insights.' },
+                   { type: 'Part-time', company: 'DataMinds', description: 'Assist in preparing and visualizing data for small projects.' },
+                   { type: 'Internship', company: 'Analytiq', description: 'Support the data analysis team with research and reporting tasks.' }
+                ],
+                'Marketing Specialist': [
+                   { type: 'Full-time', company: 'BrandBoost', description: 'Plan and execute comprehensive marketing strategies.' },
+                   { type: 'Part-time', company: 'MarketTrendz', description: 'Work on small-scale marketing campaigns for clients.' },
+                   { type: 'Internship', company: 'GrowthSphere', description: 'Learn and assist in implementing marketing campaigns.' }
+                ],
+                'Product Manager': [
+                   { type: 'Full-time', company: 'ProductVision', description: 'Oversee product development and ensure alignment with goals.' },
+                   { type: 'Part-time', company: 'ProManage', description: 'Support the team in managing product requirements and releases.' },
+                   { type: 'Internship', company: 'LaunchTrack', description: 'Gain hands-on experience in product management processes.' }
+                ],
+                'UX/UI Designer': [
+                   { type: 'Full-time', company: 'DesignFlow', description: 'Create intuitive designs to improve user experience.' },
+                   { type: 'Part-time', company: 'UserPath', description: 'Work on user interface improvements for specific projects.' },
+                   { type: 'Internship', company: 'InnovateUI', description: 'Learn and assist in crafting user-centric designs.' }
+                ],
+                'Project Manager': [
+                   { type: 'Full-time', company: 'PioneerProjects', description: 'Lead teams to ensure the timely delivery of projects.' },
+                   { type: 'Part-time', company: 'AgilePath', description: 'Coordinate small-scale projects and deliverables.' },
+                   { type: 'Internship', company: 'ProjectStart', description: 'Support the project management team with documentation and tracking.' }
+                ],
+                'Software Engineer': [
+                   { type: 'Full-time', company: 'CodeCraft', description: 'Design and develop high-quality software applications.' },
+                   { type: 'Part-time', company: 'SoftCore', description: 'Contribute to coding tasks and software maintenance projects.' },
+                   { type: 'Internship', company: 'CodeBase', description: 'Learn and assist with software development tasks.' }
+               ]
+        };
+
+        function showJobDetails(jobType) {
+            const jobInfo = jobDetails[jobType];
+            const modalTitle = document.getElementById('jobModalTitle');
+            const modalContent = document.getElementById('jobDetailsContent');
+
+            modalTitle.textContent = jobType;
+            modalContent.innerHTML = '';
+
+            jobInfo.forEach(job => {
+                modalContent.innerHTML += `
+                    <div class="job-item">
+                        <h4>${job.type} - ${job.company}</h4>
+                        <p>${job.description}</p>
+                        <button onclick="showApplicationForm('${job.type} at ${job.company}')">Apply Now</button>
+
+                    </div>
+                `;
+            });
+
+            document.getElementById('jobModal').style.display = 'block';
+        }
+
+        function closeJobModal() {
+            document.getElementById('jobModal').style.display = 'none';
+        }
+
+        function applyForJob(company, type) {
+             // Remove the alert and link this to the form display
+             showApplicationForm(`${type} position at ${company}`);
+}
+        let currentJob = '';
+
+        function showApplicationForm(jobTitle) {
+            currentJob = jobTitle;
+            document.getElementById('applicationModalTitle').textContent = `Apply for ${jobTitle}`;
+            document.getElementById('applicationModal').style.display = 'block';
+        }
+
+        function closeApplicationModal() {
+            document.getElementById('applicationModal').style.display = 'none';
+        }
+
+        function submitApplication(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const resume = document.getElementById('resume').files[0];
+
+            if (email && phone && resume) {
+                // Close the application modal
+                closeApplicationModal();
+
+                // Show success modal
+                document.getElementById('successModal').style.display = 'block';
+            } else {
+                alert('Please fill out all fields.');
+            }
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+    function closeApplicationModal() {
+        document.getElementById("applicationModal").style.display = "none";
+    }
+
+    function submitApplication(event) {
+        event.preventDefault(); // Prevent form submission to check validation
+
+        // Reset error messages
+        resetErrors();
+
+        // Get form values
+        const name = document.getElementById("name").value;
+        const address = document.getElementById("address").value;
+        const email = document.getElementById("email").value;
+        const phone = document.getElementById("phone").value;
+        const dob = document.getElementById("dob").value;
+        const experience = document.getElementById("experience").value;
+        const expectedSalary = document.getElementById("expectedSalary").value;
+        const coverLetter = document.getElementById("coverLetter").value;
+        const resume = document.getElementById("resume").files[0];
+
+        // Perform validation and show error messages if any
+        let isValid = true;
+        if (name === "") {
+            showError("name-error", "Name is required.");
+            isValid = false;
+        }
+        if (address === "") {
+            showError("address-error", "Address is required.");
+            isValid = false;
+        }
+        if (email === "") {
+            showError("email-error", "Email is required.");
+            isValid = false;
+        } else {
+            // Simple email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                showError("email-error", "Please enter a valid email address.");
+                isValid = false;
+            }
+        }
+
+        if (phone === "") {
+            showError("phone-error", "Phone number is required.");
+            isValid = false;
+        } else {
+            // Simple phone number validation (10 digits)
+            const phonePattern = /^\d{10}$/;
+            if (!phonePattern.test(phone)) {
+                showError("phone-error", "Please enter a valid phone number (10 digits).");
+                isValid = false;
+            }
+        }
+
+        if (dob === "") {
+            showError("dob-error", "Date of birth is required.");
+            isValid = false;
+        }
+
+        if (experience === "") {
+            showError("experience-error", "Experience is required.");
+            isValid = false;
+        }
+
+        if (expectedSalary === "") {
+            showError("salary-error", "Expected salary is required.");
+            isValid = false;
+        }
+
+        if (coverLetter === "") {
+            showError("why-error", "Cover letter is required.");
+            isValid = false;
+        }
+
+        if (!resume) {
+            showError("resume-error", "Resume is required.");
+            isValid = false;
+        }
+
+        // If all fields are valid, show success message
+        if (isValid) {
+            alert("Application submitted successfully!");
+            closeApplicationModal();
+        }
+    }
+
+    function showError(id, message) {
+        document.getElementById(id).innerText = message;
+    }
+
+    function resetErrors() {
+        document.getElementById("name-error").innerText = "";
+        document.getElementById("address-error").innerText = "";
+        document.getElementById("email-error").innerText = "";
+        document.getElementById("phone-error").innerText = "";
+        document.getElementById("dob-error").innerText = "";
+        document.getElementById("experience-error").innerText = "";
+        document.getElementById("salary-error").innerText = "";
+        document.getElementById("why-error").innerText = "";
+        document.getElementById("resume-error").innerText = "";
+    }
+    </script>
+</body>
+</html>

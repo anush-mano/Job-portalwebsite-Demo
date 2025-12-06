@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team - Connect.in</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #F2C2A9;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .team-container {
+            width: 100%;
+            overflow: hidden;
+            height: 300px; /* Adjusted height to fit larger text */
+            position: relative;
+            padding: 20px 0;
+            display: flex;
+            align-items: center; /* Centers the marquee vertically */
+            justify-content: center; /* Centers the marquee horizontally */
+        }
+
+        .team-marquee {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            bottom: 0;
+            animation: scrollUp 20s linear infinite; /* 20s animation time + 1s gap */
+            font-size: 2rem; /* Increased text size */
+        }
+
+        .team-member {
+            margin: 20px 0; /* Increased spacing between team members */
+        }
+
+        .team-member p:first-child {
+            color: #8B0000; /* Dark red color for names */
+        }
+
+        @keyframes scrollUp {
+            0% {
+                transform: translateY(100%);
+            }
+            90% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Meet Our Team</h1>
+    
+    <div class="team-container">
+        <div class="team-marquee">
+            <div class="team-member">
+                <p>Anusha Manohar</p>
+                <p>Founder & CEO</p>
+            </div>
+
+            <div class="team-member">
+                <p>Lathisha Padayachi</p>
+                <p>Lead Developer</p>
+            </div>
+
+            <div class="team-member">
+                <p>Sayyed Samreen</p>
+                <p>UI/UX Designer</p>
+            </div>
+
+            <div class="team-member">
+                <p>Vaishnavi Panchal</p>
+                <p>Marketing Head</p>
+            </div>
+
+            <div class="team-member">
+                <p>Arthi Manohar</p>
+                <p>Content Writer</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

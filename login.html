@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect.in - Login / Signup</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .login, .signup {
+            border: 1px solid black;
+            width: 400px;
+            height: 500px;
+            background: url('Moon.webp');
+            color: white;
+            border-radius: 20px;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.75);
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            display: none; /* Initially hidden */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            padding: 40px;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: brightness(40%);
+            gap: 10px;
+        }
+
+        h1 {
+            font-weight: normal;
+            font-size: 24px;
+            text-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        label {
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 2px;
+            padding-left: 10px;
+        }
+
+        input {
+            background: rgba(255,255,255,0.3);
+            height: 40px;
+            line-height: 40px;
+            border-radius: 20px;
+            padding: 0px 20px;
+            border: none;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        button {
+            background: rgb(45,126,231);
+            height: 40px;
+            line-height: 40px;
+            border-radius: 40px;
+            border: none;
+            margin: 10px 0px;
+            box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: rgb(35,106,211);
+        }
+
+        .toggle-buttons {
+            margin-bottom: 20px;
+        }
+
+        .toggle-buttons button {
+            background: #555;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .toggle-buttons button:hover {
+            background: #777;
+        }
+    </style>
+
+    <script>
+        function showLogin() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('signup-form').style.display = 'none';
+        }
+
+        function showSignUp() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        }
+
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            if (email && password) {
+                localStorage.setItem('user', JSON.stringify({ name: email.split('@')[0], email: email }));
+                alert('Login Successful');
+                window.location.href = 'naukri.html';
+            } else {
+                alert('Please enter both email and password');
+            }
+        }
+
+        function signUp() {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            if (name && email && password) {
+                localStorage.setItem('user', JSON.stringify({ name: name, email: email }));
+                alert('Sign Up Successful');
+                window.location.href = 'naukri.html';
+            } else {
+                alert('Please fill out all fields');
+            }
+        }
+
+        // Show login form by default on page load
+        window.onload = function () {
+            showLogin();
+        };
+    </script>
+</head>
+
+<body>
+
+    <div class="toggle-buttons">
+        <button onclick="showLogin()">Login</button>
+        <button onclick="showSignUp()">Sign Up</button>
+    </div>
+
+    <div class="container">
+        <!-- Login Form -->
+        <div class="login" id="login-form">
+            <form>
+                <h1>LOGIN</h1>
+                <label>Email</label>
+                <input type="email" id="login-email" placeholder="Enter your email">
+                <label>Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password">
+                <button type="button" onclick="login()">Submit</button>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div class="signup" id="signup-form">
+            <form>
+                <h1>SIGN UP</h1>
+                <label>Name</label>
+                <input type="text" id="signup-name" placeholder="Enter your name">
+                <label>Email</label>
+                <input type="email" id="signup-email" placeholder="Enter your email">
+                <label>Password</label>
+                <input type="password" id="signup-password" placeholder="Enter your password">
+                <button type="button" onclick="signUp()">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

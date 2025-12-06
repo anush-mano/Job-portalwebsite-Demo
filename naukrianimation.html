@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FFE5EC;
+            text-align: center;
+            padding: 50px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        /* Animation for fading in with a loop */
+        .fade-in {
+            animation: fadeIn 2s ease-in-out infinite;
+        }
+        /* Slide-in from the left animation */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+               transform: translateX(0);
+               opacity: 1;
+            }
+      }
+
+        /* Apply animation to the text */
+        .slide-in-left {
+            animation: slideInLeft 2s infinite;
+      }
+
+
+        /* Keyframes for fade-in animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Styling for text and buttons */
+        h1, p {
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: #6a11cb;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2575fc;
+        }
+
+        /* Marquee container positioning */
+        .marquee-container {
+            position: relative;
+            width: 100%;  /* Increased width of the marquee */
+            height: 150px;  /* Adjust height to fit images */
+            overflow: hidden;
+            margin-top: 30px;
+        }
+
+        /* The marquee styling */
+        .marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marqueeAnimation 30s linear infinite; /* Reduced animation time to 10s */
+        }
+
+        /* Marquee animation effect */
+        @keyframes marqueeAnimation {
+            0% {
+                transform: translateX(0);  /* Start from the right */
+            }
+            100% {
+                transform: translateX(-100%);  /* Move to the left */
+            }
+        }
+
+        /* Style for images inside the marquee */
+        .marquee img {
+            height: 120px;  /* Adjust height to fit images */
+            margin: 10px;
+            object-fit: contain;  /* Ensures images maintain aspect ratio */
+        }
+    </style>
+    <title>Animation Example</title>
+</head>
+<body>
+
+    <!-- Text and animations -->
+    <h1 class="fade-in">Welcome to connect.in</h1>
+    <p class="slide-in-left">Let's explore more opportunities and get placed at professional sectors</p>
+
+    <!-- Divider between text and marquee -->
+    <hr style="width: 80%; margin: 20px 0;">
+
+    <!-- Marquee container for job photos -->
+    <div class="marquee-container">
+        <div class="marquee">
+            <img src="Web-Developer.png" alt="Job 1">
+            <img src="graphic-design.jpg" alt="Job 2">
+            <img src="Data-Analyst.jpeg" alt="Job 3">
+            <img src="marketing-specialist.png" alt="Job 4">
+            <img src="product-manager.png" alt="Job 5">
+            <img src="ui-ux.png" alt="Job 6">
+            <img src="project-manager.webp" alt="Job 7">
+            <img src="software-engineer.webp" alt="Job 8">
+            <!-- Duplicate the images to ensure continuous scrolling -->
+            <img src="Web-Developer.png" alt="Job 1">
+            <img src="graphic-design.jpg" alt="Job 2">
+            <img src="Data-Analyst.jpeg" alt="Job 3">
+            <img src="marketing-specialist.png" alt="Job 4">
+            <img src="product-manager.png" alt="Job 5">
+            <img src="ui-ux.png" alt="Job 6">
+            <img src="project-manager.webp" alt="Job 7">
+            <img src="software-engineer.webp" alt="Job 8">
+        </div>
+    </div>
+
+</body>
+</html>
